@@ -9,11 +9,11 @@ A system with Node.js installed.
 
 ### Installing
 Fork the repository and `git pull` onto your local machine. Then, cd into the directory and install:
-```npm install express --save
+`npm install express --save
 npm install  js-alert --save
 npm install request  --save
 npm install body-parser --save
-npm install btoa --save```
+npm install btoa --save`
 
 ### First Steps
 Firstly, you must change the `apiKey` and `apiSecret` located in the `RapidSDK.js` file to be your `apiKey` and `apiSecret` from the [Mobile Dashboard](http://mobile.dubtel.com).

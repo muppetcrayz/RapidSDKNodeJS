@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://npmcdn.com/js-alert/dist/jsalert.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: black;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Add padding to containers */
+
+        .container {
+            padding: 16px;
+            background-color: white;
+        }
+
+        /* Full-width input fields */
+
+        input[type=text],
+        input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+        }
+
+        input[type=text]:focus,
+        input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+        /* Overwrite default styles of hr */
+
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        /* Set a style for the submit button */
+
+        .registerbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+        .registerbtn:hover {
+            opacity: 1;
+        }
+
+        /* Add a blue text color to links */
+
+        a {
+            color: dodgerblue;
+        }
+
+        /* Set a grey background color and center the text of the "sign in" section */
+
+        .signin {
+            background-color: #f1f1f1;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="datademoform">
+        <div class="container">
+            <h1>Data Demo</h1>
+            <p>Create, Read, Update and Delete with RapidSDK!</p>
+
+            <hr>
+            <h1>Create</h1>
+            <div class="form-group">
+                <label for="createData">JSON of Data:</label>
+                <textarea class="form-control" rows="5" id="createDataTextArea">{"MyData": "Hello World!" }</textarea>
+            </div>
+            <button type="button" class="registerbtn" value="create" onclick="return createData()">Create Data</button>
+            <hr>
+            <br>
+
+            <hr>
+            <h1>Read</h1>
+            <div class="form-group">
+                    <label for="readData">Array of Keys:</label>
+                    <textarea class="form-control" rows="5" id="readDataTextArea">["MyData"]</textarea>
+                </div>
+                <button type="button" class="registerbtn" value="read" onclick="return readData()">Read Data</button>
+            <hr>
+            <br>
+
+            <hr>
+            <h1>Update</h1>
+            <div class="form-group">
+                    <label for="updateData">JSON of Data:</label>
+                    <textarea class="form-control" rows="5" id="updateDataTextArea">{"MyData": "Goodbye World!" }</textarea>
+                </div>
+                <button type="button" class="registerbtn" value="update" onclick="return updateData()">Update Data</button>
+            <hr>
+            <br>
+
+            <hr>
+            <h1>Delete</h1>
+            <div class="form-group">
+                    <label for="deleteData">Array of Keys:</label>
+                    <textarea class="form-control" rows="5" id="deleteDataTextArea">["MyData"]</textarea>
+                </div>
+                <button type="button" class="registerbtn" value="delete" onclick="return deleteData()">Delete Data</button>
+            <hr>
+            <br>
+
+        </div>
+
+        <div class="container signin">
+            <p>
+                <a href="/logout">Logout</a>
+            </p>
+        </div>
+    </form>
+
+</body>
+
+<script>
+
+    function createData() {
+        var data = $("#createDataTextArea").val();
+
+        if (IsJsonString(data) == true) {
+            $.ajax({
+                type: 'POST',
+                data: data,
+                contentType: 'application/json',
+                url: '/createData',
+                success: function (data) {
+                    JSAlert.alert(data.message);
+                }
+            });
+        }
+        else {
+            JSAlert.alert("Not a valid JSON!");
+        }
+    }
+    
+    function readData() {
+        var data = $("#readDataTextArea").val();
+
+        if (IsJsonString(data) == true) {
+            $.ajax({
+                type: 'POST',
+                data: data,
+                contentType: 'application/json',
+                url: '/readData',
+                success: function (data) {  
+                    if(data.status == 'Failed') {
+                        JSAlert.alert(data.message);
+                    }  
+                    else {
+                        JSAlert.alert(JSON.stringify(data.data));
+                    }              
+                    
+                }
+            });
+        }
+        else {
+            JSAlert.alert("Not a valid JSON!");
+        }
+    }
+
+    function updateData() {
+        var data = $("#updateDataTextArea").val();
+
+        if (IsJsonString(data) == true) {
+            $.ajax({
+                type: 'POST',
+                data: data,
+                contentType: 'application/json',
+                url: '/updateData',
+                success: function (data) {
+                    JSAlert.alert(data.message);
+                }
+            });
+        }
+        else {
+            JSAlert.alert("Not a valid JSON!");
+        }
+    }
+
+    function deleteData() {
+        var data = $("#deleteDataTextArea").val();
+        if (IsJsonString(data) == true) {
+            $.ajax({
+                type: 'POST',
+                data: data,
+                contentType: 'application/json',
+                url: '/deleteData',
+                success: function (data) {                  
+                    JSAlert.alert(data.message);
+                }
+            });
+        }
+        else {
+            JSAlert.alert("Not a valid JSON!");
+        }
+    }
+
+    // Check if data is a valid JSON 
+    function IsJsonString (str) {
+        try {          
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
+    }  
+</script>
+
+
+
+
+</html>

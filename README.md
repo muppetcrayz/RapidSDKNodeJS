@@ -20,5 +20,6 @@ Firstly, you must change the `apiKey` and `apiSecret` located in the `RapidSDK.j
 
 ## Authors
 * Misael Barcelona - [mbarcelona](https://github.com/mbarcelona)
+* John Opoku - [johnopoku](https://github.com/johnopoku)
 
 Powered by Dubtel Consulting, LLC.

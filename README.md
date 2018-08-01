@@ -16,7 +16,7 @@ npm install body-parser --save
 npm install btoa --save`
 
 ### First Steps
-Firstly, you must change the `apiKey` and `apiSecret` located in the `RapidSDK.js` file to be your `apiKey` and `apiSecret` from the [Mobile Dashboard](http://mobile.dubtel.com).
+Firstly, you must change the `apiKey` and `apiSecret` located in the `index.js` file to be your `apiKey` and `apiSecret` from the [Mobile Dashboard](http://mobile.dubtel.com).
 
 ## Authors
 * Misael Barcelona - [mbarcelona](https://github.com/mbarcelona)

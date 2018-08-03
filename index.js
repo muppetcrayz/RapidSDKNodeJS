@@ -18,7 +18,7 @@ exports.Login = function (email, password, callback) {
 
     try {
         var form = {
-            username: email,
+            email: email,
             password: password,
         };
 
